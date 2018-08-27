@@ -956,12 +956,32 @@ public class AddressBook {
     }
 
     /**
+     * Update the given person's phone number
+     *
+     * @param person who you're updating
+     * @param newNumber of the person
+     */
+    private static void setPhoneOfPerson(String[] person, String newNumber) {
+        person[PERSON_DATA_INDEX_PHONE] = newNumber;
+    }
+
+    /**
      * Returns given person's phone number
      *
      * @param person whose phone number you want
      */
     private static String getPhoneFromPerson(String[] person) {
         return person[PERSON_DATA_INDEX_PHONE];
+    }
+
+    /**
+     * Update the given person's phone number
+     *
+     * @param person who you're updating
+     * @param newEmail of the person
+     */
+    private static void setEmailOfPerson(String[] person, String newEmail) {
+        person[PERSON_DATA_INDEX_EMAIL] = newEmail;
     }
 
     /**
