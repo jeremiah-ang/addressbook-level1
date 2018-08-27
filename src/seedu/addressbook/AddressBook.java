@@ -523,6 +523,82 @@ public class AddressBook {
                 extractEmailFromUpdatePersonString(commandArgs)) ? getMessageForSuccessfulUpdate(targetInModel)
                                                                  : MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
     }
+
+    /**
+     * Verify if command arguments for update is valid
+     *
+     * @param commandArgs the string of arguments
+     * @return true if is valid false otherwise
+     */
+    private static boolean isValidUpdatePersonCommandInput(String commandArgs) {
+        return isPersonDataExtractableFrom(commandArgs);
+    }
+
+    /**
+     * Extract the target index
+     *
+     * @param commandArgs the full command arguments to find the index
+     * @return the index from the full command line arguments
+     */
+    private static int extractTargetIndexFromUpdatePersonArgs(String commandArgs) {
+        return Integer.parseInt(extractNameFromPersonString(commandArgs));
+    }
+
+    /**
+     * Update particulars of a person string array
+     *
+     * @param personToUpdate the actual person to update
+     * @param newPhone the new phone numner
+     * @param newEmail the new email address
+     * @return true if person exists false otherwise
+     */
+    private static boolean updatePersonInAddressBook(String[] personToUpdate, String newPhone, String newEmail) {
+        if (ALL_PERSONS.contains(personToUpdate)) {
+            if(!newPhone.isEmpty()) {
+                setPhoneOfPerson(personToUpdate, newPhone);
+            }
+            if(!newEmail.isEmpty()) {
+                setEmailOfPerson(personToUpdate, newEmail);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Extract the new phone number from the full command line argument
+     *
+     * @param commandArgs the full command line argument to extract the phone number
+     * @return the new phone numner
+     */
+    private static String extractPhoneFromUpdatePersonString(String commandArgs) {
+        return extractPhoneFromPersonString(commandArgs);
+    }
+
+    /**
+     * Extract the new email from the full command line argument
+     *
+     * @param commandArgs the full command line argument to extract the email
+     * @return the new email address
+     */
+    private static String extractEmailFromUpdatePersonString(String commandArgs) {
+        return extractEmailFromPersonString(commandArgs);
+    }
+
+    /**
+     * Format a new message for successfully updating a user
+     *
+     * @param personUpdated the person updated
+     * @return the formatted string
+     */
+    private static String getMessageForSuccessfulUpdate(String[] personUpdated) {
+        return String.format(
+                MESSAGE_UPDATED,
+                getNameFromPerson(personUpdated),
+                getPhoneFromPerson(personUpdated),
+                getEmailFromPerson(personUpdated)) + LS;
+    }
+
     /**
      * Deletes person identified using last displayed index.
      *
