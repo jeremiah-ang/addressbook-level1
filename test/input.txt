@@ -42,6 +42,28 @@
   list
 
 ##########################################################
+# test update persons command
+##########################################################
+
+  # should catch invalid args format
+  update wrong args wrong args
+  update 1 p/12345 valid@email.butNoPrefix
+  update 1 12345 e/valid@email.butPhonePrefixMissing
+
+  # should catch invalid index
+  update -1 p/12345 e/valid@email.com
+  update 6 p/12345 e/valid@email.com
+  update 0 p/12345 e/valid@email.com
+
+  # updates correctly
+  update 1 p/23456789 e/new@email.com
+  list
+
+  # updates correctly
+  update 1 p/111111 e/adam@gmail.com
+  list
+
+##########################################################
 # test find persons command
 ##########################################################
 
