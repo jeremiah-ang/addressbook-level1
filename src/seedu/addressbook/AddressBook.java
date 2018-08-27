@@ -502,6 +502,28 @@ public class AddressBook {
     }
 
     /**
+     * Update a person in the address book
+     *
+     * @param commandArgs the full command line argument
+     * @return message from the execution
+     */
+    private static String executeUpdatePerson(String commandArgs) {
+        if (!isValidUpdatePersonCommandInput(commandArgs)) {
+            return getMessageForInvalidCommandInput(COMMAND_UPDATE_WORD, getUsageInfoForUpdateCommand());
+        }
+
+        final int targetVisibleIndex = extractTargetIndexFromUpdatePersonArgs(commandArgs);
+        if (!isDisplayIndexValidForLastPersonListingView(targetVisibleIndex)) {
+            return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        }
+        final String[] targetInModel = getPersonByLastVisibleIndex(targetVisibleIndex);
+        return updatePersonInAddressBook(
+                targetInModel,
+                extractPhoneFromUpdatePersonString(commandArgs),
+                extractEmailFromUpdatePersonString(commandArgs)) ? getMessageForSuccessfulUpdate(targetInModel)
+                                                                 : MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
+    }
+    /**
      * Deletes person identified using last displayed index.
      *
      * @param commandArgs full command args string from the user
