@@ -66,6 +66,7 @@ public class AddressBook {
      * =========================================================================
      */
     private static final String MESSAGE_ADDED = "New person added: %1$s, Phone: %2$s, Email: %3$s";
+    private static final String MESSAGE_UPDATED = "Person updated: %1$s, Phone: %2$s, Email: %3$s";
     private static final String MESSAGE_ADDRESSBOOK_CLEARED = "Address book has been cleared!";
     private static final String MESSAGE_COMMAND_HELP = "%1$s: %2$s";
     private static final String MESSAGE_COMMAND_HELP_PARAMETERS = "\tParameters: %1$s";
@@ -110,6 +111,13 @@ public class AddressBook {
                                         + "keywords (case-sensitive) and displays them as a list with index numbers.";
     private static final String COMMAND_FIND_PARAMETERS = "KEYWORD [MORE_KEYWORDS]";
     private static final String COMMAND_FIND_EXAMPLE = COMMAND_FIND_WORD + " alice bob charlie";
+
+    private static final String COMMAND_UPDATE_WORD = "update";
+    private static final String COMMAND_UPDATE_DESC = "Update information of a person";
+    private static final String COMMAND_UPDATE_PARAMETERS = "INDEX "
+                                                        + PERSON_DATA_PREFIX_PHONE + "PHONE_NUMBER "
+                                                        + PERSON_DATA_PREFIX_EMAIL + "EMAIL";
+    private static final String COMMAND_UPDATE_EXAMPLE = COMMAND_UPDATE_WORD + " 1 p/23456789 e/new_name@gmail.com";
 
     private static final String COMMAND_LIST_WORD = "list";
     private static final String COMMAND_LIST_DESC = "Displays all persons as a list with index numbers.";
@@ -1084,6 +1092,7 @@ public class AddressBook {
     private static String getUsageInfoForAllCommands() {
         return getUsageInfoForAddCommand() + LS
                 + getUsageInfoForFindCommand() + LS
+                + getUsageInfoForUpdateCommand() + LS
                 + getUsageInfoForViewCommand() + LS
                 + getUsageInfoForDeleteCommand() + LS
                 + getUsageInfoForClearCommand() + LS
@@ -1103,6 +1112,13 @@ public class AddressBook {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_FIND_WORD, COMMAND_FIND_DESC) + LS
                 + String.format(MESSAGE_COMMAND_HELP_PARAMETERS, COMMAND_FIND_PARAMETERS) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_FIND_EXAMPLE) + LS;
+    }
+
+    /** Returns the string for showing 'update' command usage instruction */
+    private static String getUsageInfoForUpdateCommand() {
+        return String.format(MESSAGE_COMMAND_HELP, COMMAND_UPDATE_WORD, COMMAND_UPDATE_DESC) + LS
+                + String.format(MESSAGE_COMMAND_HELP_PARAMETERS, COMMAND_UPDATE_PARAMETERS) + LS
+                + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_UPDATE_EXAMPLE) + LS;
     }
 
     /** Returns the string for showing 'delete' command usage instruction */
